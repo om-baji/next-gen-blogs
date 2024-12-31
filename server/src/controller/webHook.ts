@@ -5,7 +5,7 @@ import { getPrismaClient } from "../utils/db";
 
 export class UserWebhook {
   static async userWebhook(c: Context) {
-    try {
+    try { 
       const webhookSecret = c.env.WEBHOOK_SECRET;
 
       if (!webhookSecret) {

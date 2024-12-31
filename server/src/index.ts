@@ -15,6 +15,7 @@ app.use(cors({
   allowMethods : ['GET','POST','PUT','OPTIONS','DELETE']
 }))
 
+
 app.get('/', (c) => {
   return c.json({
     message : "Health Ok!"
