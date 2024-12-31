@@ -1,0 +1,22 @@
+{
+  "name": "server",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy --minify"
+  },
+  "dependencies": {
+    "@clerk/clerk-sdk-node": "^5.1.4",
+    "@cloudflare/vitest-pool-workers": "^0.5.40",
+    "@prisma/client": "6.1.0",
+    "@prisma/extension-accelerate": "^1.2.1",
+    "hono": "^4.6.15",
+    "prisma": "^6.1.0",
+    "supertest": "^7.0.0",
+    "svix": "^1.44.0",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20241218.0",
+    "wrangler": "^3.96.0"
+  }
+}
