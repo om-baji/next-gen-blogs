@@ -30,5 +30,11 @@ model Blogs {
   title  String
   body   Json
   userId String
+  email  String
   User   User   @relation(fields: [userId], references: [id])
+}
+
+enum Type {
+  MD
+  STR
 }
