@@ -77,7 +77,7 @@ export class NotesController {
     try {
       const prisma = getPrismaClient(c.env.DATABASE_URL)
 
-      const id = c.req.param("id");
+      const id = c.req.query("id");
 
       const note = await prisma.notes.findUnique({
         where: {
@@ -89,7 +89,7 @@ export class NotesController {
         return c.json({ message: "Note does not exist!" }, 404);
       }
 
-      const del = await prisma.notes.delete({
+      await prisma.notes.delete({
         where: {
           id,
         },
@@ -114,7 +114,7 @@ export class NotesController {
     try {
       const prisma = getPrismaClient(c.env.DATABASE_URL)
 
-      const id = c.req.param("id");
+      const id = c.req.query("id");
       const body = await c.req.json();
       const note = await prisma.notes.findUnique({
         where: {

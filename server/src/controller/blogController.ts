@@ -121,7 +121,7 @@ export class BlogController {
     try {
       const prisma = getPrismaClient(c.env.DATABASE_URL);
 
-      const id = c.req.param("id");
+      const id = c.req.query("id");
       const body = await c.req.json();
       const blog = await prisma.blogs.findUnique({
         where: {
@@ -165,7 +165,7 @@ export class BlogController {
     try {
       const prisma = getPrismaClient(c.env.DATABASE_URL);
 
-      const id = c.req.param("id");
+      const id = c.req.query("id");
       const blog = await prisma.blogs.findUnique({
         where: {
           id,
