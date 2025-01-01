@@ -28,13 +28,8 @@ model Notes {
 model Blogs {
   id     String @id @default(cuid())
   title  String
-  body   Json
+  body   String
   userId String
   email  String
   User   User   @relation(fields: [userId], references: [id])
-}
-
-enum Type {
-  MD
-  STR
 }

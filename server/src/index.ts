@@ -2,6 +2,7 @@ import { Hono } from 'hono';
 import { notesRouter } from './router/userRoutes';
 import { webhookRouter } from './router/webhookRoute';
 import { cors } from 'hono/cors';
+import { blogRouter } from './router/blogRouter';
 
 const app = new Hono<{
   Bindings : {
@@ -24,6 +25,7 @@ app.get('/', (c) => {
 
 app.route("/api/v1/notes", notesRouter)
 app.route("/api/v1/webhook", webhookRouter)
+app.route("/api/v1/blogs",blogRouter)
 
 
 export default app
