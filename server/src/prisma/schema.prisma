@@ -26,10 +26,11 @@ model Notes {
 }
 
 model Blogs {
-  id     String @id @default(cuid())
+  id     String  @id @default(cuid())
   title  String
   body   String
+  image  String?
   userId String
   email  String
-  User   User   @relation(fields: [userId], references: [id])
+  User   User    @relation(fields: [userId], references: [id])
 }

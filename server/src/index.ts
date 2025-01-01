@@ -1,8 +1,9 @@
 import { Hono } from 'hono';
-import { notesRouter } from './router/userRoutes';
+import { notesRouter } from './router/notesRoutes';
 import { webhookRouter } from './router/webhookRoute';
 import { cors } from 'hono/cors';
 import { blogRouter } from './router/blogRouter';
+import openApiSpec from "./openapi.spec.json"
 
 const app = new Hono<{
   Bindings : {
@@ -21,6 +22,10 @@ app.get('/', (c) => {
   return c.json({
     message : "Health Ok!"
   }, 200)
+})
+
+app.get("/docs", async (c) => {
+  return c.json(openApiSpec)
 })
 
 app.route("/api/v1/notes", notesRouter)
