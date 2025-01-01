@@ -8,6 +8,7 @@ import openApiSpec from "./openapi.spec.json"
 const app = new Hono<{
   Bindings : {
     DATABASE_URL : string;
+    WEBHOOK_SECRET : string;
   }
 }>()
 
