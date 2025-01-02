@@ -7,8 +7,6 @@ import { Input } from '@/components/ui/input';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Separator } from "@/components/ui/separator"
 
-
-
 const Signin: React.FC = () => {
     const { isLoaded, setActive, signIn } = useSignIn()
     const [email, setEmail] = useState("")

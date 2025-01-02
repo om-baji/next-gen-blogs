@@ -6,6 +6,10 @@ import { ClerkProvider } from '@clerk/clerk-react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Signin from './pages/Signin.tsx';
 import Signup from './pages/Signup.tsx';
+import Home from './pages/Home.tsx';
+import Layout from './components/Sidebar.tsx';
+import { ThemeProvider } from './components/ThemeProvider.tsx';
+import { Toaster } from "@/components/ui/toaster"
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -22,12 +26,19 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
   },
+  {
+    path: "/home",
+    element: <Layout children={<Home />} />
+  }
 ]);
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
-      <RouterProvider router={router} />
+      <ThemeProvider>
+        <RouterProvider router={router} />
+        <Toaster />
+      </ThemeProvider>
     </ClerkProvider>
   </StrictMode>
 );
