@@ -11,7 +11,9 @@ const BlogCard = ({ id, image, title, body }: CardProps) => {
     return (
         <Card key={id}>
             <CardHeader>
-                <img src={image} alt={title} />
+                <img 
+                className="w-40 h-40"
+                src={image} alt={title} />
                 <CardTitle>
                     {title}
                 </CardTitle>

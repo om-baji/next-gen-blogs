@@ -25,10 +25,12 @@ import remarkGfm from 'remark-gfm';
 import { Button } from '../ui/button';
 import { Label } from '../ui/label';
 import { Input } from '../ui/input';
+import axios from 'axios';
 
 const RichTextEditor = () => {
   const [markdown, setMarkdown] = useState('Start writing here...');
   const [title, setTitle] = useState("")
+  const [image,setImage] = useState("")
   const [isLoading, setIsLaoding] = useState(false)
 
   const { user } = useUser()
@@ -40,7 +42,8 @@ const RichTextEditor = () => {
         title,
         body: markdown,
         userId: user?.id,
-        email: user?.emailAddresses[0].emailAddress
+        email: user?.emailAddresses[0].emailAddress,
+        image : image as string
       })
 
       toast({
@@ -64,17 +67,53 @@ const RichTextEditor = () => {
     }
   }
 
+  const onUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append("upload_preset", "my_image")
+
+    try {
+      const response = await axios.post(`https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_NAME}/image/upload`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }); 
+      const imageUrl = response.data.secure_url;
+      console.log(imageUrl)
+      setImage(imageUrl)
+      toast({
+        title: "Image uploaded successfully",
+      });
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error.message);
+        toast({
+          title: "Image upload failed",
+          description: error.message,
+        });
+      } else {
+        console.log("Unknown error");
+        toast({
+          title: "Unknown error occurred!",
+        });
+      }
+    }
+  };
+
   return (
     <div className="w-full mx-auto p-4 bg-slate-50 text-black h-screen">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 h-screen">
         <div>
           <h2 className="text-lg font-semibold mb-2">Editor</h2>
-          <input
+          <Input
             onChange={e => setTitle(e.target.value)}
             className="border border-gray-300 rounded-lg p-2 mb-4 w-full"
             type="text" placeholder='Enter title' />
           <Label htmlFor="picture">Picture</Label>
-          <Input id="picture" type="file" className='mb-4'/>
+          <Input id="picture" type="file" className='mb-4' onChange={onUpload} />
           <MDXEditor
             className="border border-gray-300 rounded-lg p-4"
             markdown={markdown}
