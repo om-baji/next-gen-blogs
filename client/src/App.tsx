@@ -1,9 +1,10 @@
-import React from 'react'
+"use server"
 
 const App = () => {
+
   return (
     <div>
-      
+      SSR Page
     </div>
   )
 }

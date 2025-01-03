@@ -17,7 +17,7 @@ import { toast } from "@/hooks/use-toast"
 const items = [
     {
         title: "Home",
-        url: "#",
+        url: "/home",
         icon: LayoutDashboardIcon,
     },
     {

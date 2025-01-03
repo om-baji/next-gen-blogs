@@ -6,6 +6,7 @@ import {
 } from "@/components/ui/resizable"
 import { useMediaQuery } from "react-responsive"
 import Navbar from '@/components/Navbar'
+import RecentBlogs from '@/components/blogs/RecentBlogs'
 
 
 const Home: React.FC = () => {
@@ -15,7 +16,7 @@ const Home: React.FC = () => {
       <ResizablePanel>
         {!isLarge && <Navbar />}
         <div className='flex justify-center items-center h-screen'>
-          Recent Blogs
+          <RecentBlogs />
         </div>
       </ResizablePanel>
       <ResizableHandle />
