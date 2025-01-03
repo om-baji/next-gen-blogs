@@ -5,7 +5,7 @@ import { getPrismaClient } from "../utils/db";
 
 export class UserWebhook {
   static async userWebhook(c: Context) {
-    try { 
+    try {
       const webhookSecret = c.env.WEBHOOK_SECRET;
 
       if (!webhookSecret) {
@@ -18,12 +18,11 @@ export class UserWebhook {
       }
 
       const payload = await c.req.text();
-      const svix_id = c.req.header('svix-id');
-      const svix_timestamp = c.req.header('svix-timestamp') 
-      const svix_signature = c.req.header('svix-signature')
+      const svix_id = c.req.header("svix-id");
+      const svix_timestamp = c.req.header("svix-timestamp");
+      const svix_signature = c.req.header("svix-signature");
 
-
-      let event : WebhookEvent;
+      let event: WebhookEvent;
       try {
         const wh = new Webhook(webhookSecret);
         event = wh.verify(payload, {
@@ -32,14 +31,16 @@ export class UserWebhook {
           "svix-signature": svix_signature as string,
         }) as WebhookEvent;
 
-        if(event.type === "user.created") {
-            const prisma = getPrismaClient(c.env.DATABASE_URL)
-            const email = event.data.email_addresses[0].email_address
-            await prisma.user.create({
-                data : {
-                    email
-                }
-            })
+        if (event.type === "user.created") {
+          const prisma = getPrismaClient(c.env.DATABASE_URL);
+          const email = event.data.email_addresses[0].email_address;
+          const userId = event.data.id;
+          await prisma.user.create({
+            data: {
+              id : userId,
+              email,
+            },
+          });
         }
 
         return c.json(
@@ -53,6 +54,7 @@ export class UserWebhook {
         return c.json(
           {
             message: "Invalid webhook signature!",
+            err
           },
           400
         );
