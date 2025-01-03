@@ -64,6 +64,7 @@ export class BlogController {
           userId: payload.data.userId,
           body: payload.data.body,
           email: payload.data.email,
+          image : payload.data.image ?? null
         },
       });
 
