@@ -17,20 +17,24 @@ model User {
 }
 
 model Notes {
-  id      String @id @default(cuid())
-  title   String
-  content String
-  userId  String
-  email   String
-  User    User   @relation(fields: [userId], references: [id])
+  id        String   @id @default(cuid())
+  title     String
+  content   String
+  userId    String
+  email     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  User      User     @relation(fields: [userId], references: [id])
 }
 
 model Blogs {
-  id     String  @id @default(cuid())
-  title  String
-  body   String
-  image  String?
-  userId String
-  email  String
-  User   User    @relation(fields: [userId], references: [id])
+  id        String   @id @default(cuid())
+  title     String
+  body      String
+  image     String?
+  userId    String
+  email     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  User      User     @relation(fields: [userId], references: [id])
 }
