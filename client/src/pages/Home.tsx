@@ -7,6 +7,7 @@ import {
 import { useMediaQuery } from "react-responsive"
 import Navbar from '@/components/Navbar'
 import RecentBlogs from '@/components/blogs/RecentBlogs'
+import RecentNotes from '@/components/notes/RecentNotes'
 
 
 const Home: React.FC = () => {
@@ -15,6 +16,9 @@ const Home: React.FC = () => {
     <ResizablePanelGroup direction="horizontal">
       <ResizablePanel>
         {!isLarge && <Navbar />}
+        <h4 className="scroll-m-20 text-xl font-semibold tracking-tight text-center">
+          Trending Posts!
+        </h4>
         <div className='flex justify-center items-center h-screen'>
           <RecentBlogs />
         </div>
@@ -22,8 +26,11 @@ const Home: React.FC = () => {
       <ResizableHandle />
       {isLarge && (
         <ResizablePanel>
+          <h4 className="scroll-m-20 text-xl font-semibold tracking-tight text-center">
+          Recent Notes
+          </h4>
           <div className='flex justify-center items-center h-screen'>
-            Recent Notes
+            <RecentNotes />
           </div>
         </ResizablePanel>
       )}

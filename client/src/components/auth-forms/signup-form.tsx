@@ -214,9 +214,9 @@ export function SignupForm({
           )}
           <div className="relative hidden bg-muted md:block">
             <img
-              src="/placeholder.svg"
+              src="https://images.unsplash.com/photo-1734276221099-ba7f256b15e2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDM4fGJvOGpRS1RhRTBZfHxlbnwwfHx8fHw%3D"
               alt="Image"
-              className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+              className="absolute inset-0 h-full w-full object-cover dark:grayscale"
             />
           </div>
         </CardContent>

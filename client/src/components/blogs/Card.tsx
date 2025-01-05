@@ -1,28 +1,36 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
 type CardProps = {
-    id: string,
-    image?: string,
-    title: string,
-    body: string
-}
+    id: string;
+    image?: string;
+    title: string;
+    body: string;
+    date?: string;
+};
 
-const BlogCard = ({ id, image, title, body }: CardProps) => {
+const BlogCard = ({ id, image, title, body, date }: CardProps) => {
+    console.log(date)
     return (
-        <Card key={id}>
+        <Card key={id} className="shadow-lg w-full">
+            {image && (
+                <img
+                    src={image}
+                    alt={title}
+                    className="w-full h-40 object-cover rounded-t-lg"
+                />
+            )}
             <CardHeader>
-                <img 
-                className="w-40 h-40"
-                src={image} alt={title} />
-                <CardTitle>
-                    {title}
-                </CardTitle>
+                <CardTitle className="text-xl font-bold mt-2">{title}</CardTitle>
             </CardHeader>
             <CardContent>
-                {body.slice(0, 500)}
+                <p className="text-gray-700">{body.slice(0, 150)}...</p>
             </CardContent>
-        </Card>
-    )
-}
+            {date && (<CardFooter className="text-white">
+                <p className="text-sm text-white mt-1">Published : {date}</p>
+            </CardFooter>)}
 
-export default BlogCard
+        </Card>
+    );
+};
+
+export default BlogCard;

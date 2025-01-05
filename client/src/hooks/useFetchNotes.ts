@@ -6,7 +6,8 @@ type Note = {
     title : string,
     body : string,
     email : string,
-    userId : string
+    userId : string,
+    createdAt : string
 }
 
 export function useFetchNotes(userId : string) {

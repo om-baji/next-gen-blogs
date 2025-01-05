@@ -1,10 +1,9 @@
-"use server"
-
 const App = () => {
+
 
   return (
     <div>
-      SSR Page
+      SSR Page2
     </div>
   )
 }

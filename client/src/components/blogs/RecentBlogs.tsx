@@ -14,13 +14,15 @@ const RecentBlogs: React.FC = () => {
     }
 
     return (
-        <div>
+        <div className='min-w-[90%]'>
             {blogs.length > 0 ? blogs.map((blog) => {
                 return <BlogCard
+                    key={blog.id}
                     title={blog.title}
                     image={blog.image}
                     body={blog.body}
-                    id={blog.id} />
+                    id={blog.id} 
+                    date={blog.createdAt} />
             }) : (
                 <span>No blogs!</span>
             )}

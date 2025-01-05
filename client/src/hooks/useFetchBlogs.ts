@@ -7,6 +7,7 @@ type Blog = {
   title: string;
   body: string;
   email: string;
+  createdAt : string;
 };
 
 export function useFetchBlogs() {
