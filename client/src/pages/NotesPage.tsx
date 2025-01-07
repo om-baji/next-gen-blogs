@@ -1,56 +1,55 @@
-import { HoverEffect } from '@/components/ui/card-hover-effect'
-import { Note, useFetchNotes } from '@/hooks/useFetchNotes'
-import { useUser } from '@clerk/clerk-react'
-import { Loader2 } from 'lucide-react'
-import React, { useCallback, useEffect, useState } from 'react'
+import { HoverEffect } from '@/components/ui/card-hover-effect';
+import { Note, useFetchNotes } from '@/hooks/useFetchNotes';
+import { useUser } from '@clerk/clerk-react';
+import { Loader2 } from 'lucide-react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 type TransformNotes = {
-    title: string,
-    description: string,
+    title: string;
+    description: string;
     link: string;
-}
+};
 
 const NotesPage: React.FC = () => {
-
-    const { user,isLoaded } = useUser()
-    if(!isLoaded) {
-        return <div>
-            <Loader2 />
-        </div>
-    }
-    const { notes, isPending } = useFetchNotes(user?.emailAddresses[0].emailAddress as string)
-
-    const [finalNotes, setFinalNotes] = useState<TransformNotes[]>([])
-
+    const { user } = useUser();
+    const { notes, isPending } = useFetchNotes(user?.emailAddresses[0]?.emailAddress || '');
+    const [finalNotes, setFinalNotes] = useState<TransformNotes[]>([]);
 
     const transformNotes = useCallback((notes: Note[] = []) => {
+        const filtered: TransformNotes[] = notes.map((note) => ({
+            title: note.title,
+            description: note.content,  
+            link: `/${note.userId}?id=${note.id}`,
+        }));
 
-        const filtered: TransformNotes[] = notes.map((note) => {
-            return {
-                title: note.title,
-                description: note.content,
-                link: `/${note.userId}?id=${note.id}`
-            } as TransformNotes;
-        })
-
-        setFinalNotes(filtered)
-
-    }, [])
+        setFinalNotes(filtered);
+    }, []);
 
     useEffect(() => {
-        transformNotes(notes)
-    }, [transformNotes])
+        transformNotes(notes || []);
+    }, [notes, transformNotes]);
+
+    // useEffect(() => {
+    //     console.log('Transformed Notes:', finalNotes);
+    // }, [finalNotes]);
 
     if (isPending) {
-        return <div>
-            <Loader2 />
-        </div>
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <Loader2 />
+            </div>
+        );
     }
-    return (
-        <div>
-            <HoverEffect items={finalNotes} />
-        </div>
-    )
-}
 
-export default NotesPage
+    return (
+        <div className="flex p-4">
+            {finalNotes.length > 0 ? (
+                <HoverEffect items={finalNotes} />
+            ) : (
+                <p className="text-gray-500">No notes available.</p>
+            )}
+        </div>
+    );
+};
+
+export default NotesPage;

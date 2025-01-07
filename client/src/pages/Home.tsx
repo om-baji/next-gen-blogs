@@ -8,10 +8,13 @@ import { useMediaQuery } from "react-responsive"
 import Navbar from '@/components/Navbar'
 import RecentBlogs from '@/components/blogs/RecentBlogs'
 import RecentNotes from '@/components/notes/RecentNotes'
+import { Button } from '@/components/ui/button'
+import { useNavigate } from 'react-router-dom'
 
 
 const Home: React.FC = () => {
   const isLarge = useMediaQuery({ query: "(min-width: 1024px)" })
+  const navigate = useNavigate()
   return (
     <ResizablePanelGroup direction="horizontal">
       <ResizablePanel>
@@ -34,6 +37,14 @@ const Home: React.FC = () => {
           </div>
         </ResizablePanel>
       )}
+
+      <Button 
+      onClick={() => {
+        navigate("/note/add")
+      }}
+      className='fixed bottom-6 right-6'>
+        Add Note
+      </Button>
     </ResizablePanelGroup>
   )
 }

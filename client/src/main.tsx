@@ -4,17 +4,17 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App.tsx';
+import BackgroundProvider from "./components/BackgroundProvider.tsx";
 import Layout from './components/Sidebar.tsx';
 import { ThemeProvider } from './components/ThemeProvider.tsx';
 import './index.css';
 import BlogEdit from './pages/BlogEdit.tsx';
 import ExpandedBlogs from "./pages/ExpandedBlogs.tsx";
 import Home from './pages/Home.tsx';
+import NotesPage from "./pages/NotesPage.tsx";
 import Signin from './pages/Signin.tsx';
 import Signup from './pages/Signup.tsx';
-import { CardHoverEffectDemo } from "./pages/Temp.tsx";
-import NotesPage from "./pages/NotesPage.tsx";
-import BackgroundProvider from "./components/BackgroundProvider.tsx";
+import NoteEditor from "./components/Editor/NoteEditor.tsx";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -40,16 +40,16 @@ const router = createBrowserRouter([
     element: <BlogEdit />
   },
   {
-    path: "/temp",
-    element: <CardHoverEffectDemo />
-  },
-  {
     path: "/blogs",
     element: <Layout children={<ExpandedBlogs />} />
   },
   {
     path : "/notes",
     element : <Layout children={<NotesPage />} />
+  },
+  {
+    path : "/note/add",
+    element : <Layout children={<NoteEditor />} />
   }
 ]);
 
