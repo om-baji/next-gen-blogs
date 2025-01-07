@@ -20,13 +20,15 @@ const RecentNotes: React.FC = () => {
             {isPending ? (
                 <span>No Notes</span>
             ) : (notes.length > 0 &&
-                notes.map((note) => {
-                    return <NotesCard
-                        title={note.title}
-                        createdAt={note.createdAt}
-                        content={note.body}
-                        id={note.id} />
-                })
+                notes
+                    .slice(0, 6)
+                    .map((note) => {
+                        return <NotesCard
+                            title={note.title}
+                            createdAt={note.createdAt}
+                            content={note.content}
+                            id={note.id} />
+                    })
             )}
         </div>
     )

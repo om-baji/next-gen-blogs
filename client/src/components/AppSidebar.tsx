@@ -22,12 +22,12 @@ const items = [
     },
     {
         title: "Blogs",
-        url: "#",
+        url: "/blogs",
         icon: PencilIcon
     },
     {
         title: "Notes",
-        url: "#",
+        url: "/notes",
         icon: NotebookIcon
     }
 ]

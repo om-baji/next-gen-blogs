@@ -8,9 +8,13 @@ import Layout from './components/Sidebar.tsx';
 import { ThemeProvider } from './components/ThemeProvider.tsx';
 import './index.css';
 import BlogEdit from './pages/BlogEdit.tsx';
+import ExpandedBlogs from "./pages/ExpandedBlogs.tsx";
 import Home from './pages/Home.tsx';
 import Signin from './pages/Signin.tsx';
 import Signup from './pages/Signup.tsx';
+import { CardHoverEffectDemo } from "./pages/Temp.tsx";
+import NotesPage from "./pages/NotesPage.tsx";
+import BackgroundProvider from "./components/BackgroundProvider.tsx";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -25,15 +29,27 @@ const router = createBrowserRouter([
   },
   {
     path: "/",
-    element: <App />,
+    element: <BackgroundProvider children={<App />} />,
   },
   {
     path: "/home",
     element: <Layout children={<Home />} />
   },
   {
-    path : "/edit",
-    element : <BlogEdit />
+    path: "/edit",
+    element: <BlogEdit />
+  },
+  {
+    path: "/temp",
+    element: <CardHoverEffectDemo />
+  },
+  {
+    path: "/blogs",
+    element: <Layout children={<ExpandedBlogs />} />
+  },
+  {
+    path : "/notes",
+    element : <Layout children={<NotesPage />} />
   }
 ]);
 

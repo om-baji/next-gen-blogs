@@ -1,9 +1,9 @@
 import { useFetchBlogs } from '@/hooks/useFetchBlogs'
 import React from 'react'
 import { Loader2 } from "lucide-react"
-import BlogCard from './Card'
+import BlogCard from '../blogs/Card'
 
-const RecentBlogs: React.FC = () => {
+const Blogs: React.FC = () => {
 
     const { blogs, isPending } = useFetchBlogs()
 
@@ -14,9 +14,8 @@ const RecentBlogs: React.FC = () => {
     }
 
     return (
-        <div className='min-w-[90%]'>
+        <div className='p-4 max-w-[40%] grid-cols-3'>
             {blogs.length > 0 ? blogs
-                .slice(0, 6)
                 .map((blog) => {
                     return <BlogCard
                         key={blog.id}
@@ -32,4 +31,4 @@ const RecentBlogs: React.FC = () => {
     )
 }
 
-export default RecentBlogs
+export default Blogs
