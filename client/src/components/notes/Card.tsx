@@ -9,7 +9,7 @@ type CardProps = {
 
 const NotesCard = ({ id, title, content,createdAt }: CardProps) => {
     return (
-        <Card key={id}>
+        <Card key={id} className='mt-4'>
             <CardHeader>
                 {title}
             </CardHeader>

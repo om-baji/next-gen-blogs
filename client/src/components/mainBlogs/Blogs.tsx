@@ -14,7 +14,7 @@ const Blogs: React.FC = () => {
     }
 
     return (
-        <div className='p-4 max-w-[40%] grid-cols-3'>
+        <div className='p-8 md:max-w-[40%] grid-cols-1 md:grid-cols-3'>
             {blogs.length > 0 ? blogs
                 .map((blog) => {
                     return <BlogCard

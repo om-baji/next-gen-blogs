@@ -1,14 +1,13 @@
-import React from 'react'
+import RecentBlogs from '@/components/blogs/RecentBlogs'
+import RecentNotes from '@/components/notes/RecentNotes'
+import { Button } from '@/components/ui/button'
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable"
+import React from 'react'
 import { useMediaQuery } from "react-responsive"
-import Navbar from '@/components/Navbar'
-import RecentBlogs from '@/components/blogs/RecentBlogs'
-import RecentNotes from '@/components/notes/RecentNotes'
-import { Button } from '@/components/ui/button'
 import { useNavigate } from 'react-router-dom'
 
 
@@ -18,8 +17,7 @@ const Home: React.FC = () => {
   return (
     <ResizablePanelGroup direction="horizontal">
       <ResizablePanel>
-        {!isLarge && <Navbar />}
-        <h4 className="scroll-m-20 text-xl font-semibold tracking-tight text-center">
+        <h4 className="scroll-m-20 text-xl font-semibold tracking-tight text-center mt-8 md:md-0">
           Trending Posts!
         </h4>
         <div className='flex justify-center items-center h-screen'>
