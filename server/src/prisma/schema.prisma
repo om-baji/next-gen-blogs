@@ -23,7 +23,7 @@ model Notes {
   userId    String
   email     String
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now()) @updatedAt
   User      User     @relation(fields: [userId], references: [id])
 }
 
@@ -35,6 +35,6 @@ model Blogs {
   userId    String
   email     String
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now()) @updatedAt
   User      User     @relation(fields: [userId], references: [id])
 }

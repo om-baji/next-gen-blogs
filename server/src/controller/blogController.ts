@@ -7,7 +7,19 @@ export class BlogController {
     try {
       const prisma = getPrismaClient(c.env.DATABASE_URL);
 
-      const blogs = await prisma.blogs.findMany();
+      const query = c.req.query("id");
+
+      let blogs;
+
+      if (query) {
+        blogs = await prisma.blogs.findMany({
+          where: {
+            id: query as string,
+          },
+        });
+      } else {
+        blogs = await prisma.blogs.findMany();
+      }
 
       return c.json({
         message: "Success",
@@ -64,7 +76,7 @@ export class BlogController {
           userId: payload.data.userId,
           body: payload.data.body,
           email: payload.data.email,
-          image : payload.data.image ?? null
+          image: payload.data.image ?? null,
         },
       });
 
@@ -87,7 +99,7 @@ export class BlogController {
   static async getBlogsByEmail(c: Context) {
     try {
       const prisma = getPrismaClient(c.env.DATABASE_URL);
-      const email = c.req.param("email")
+      const email = c.req.param("email");
 
       if (!email) {
         return c.json({
