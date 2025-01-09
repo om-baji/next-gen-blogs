@@ -15,6 +15,7 @@ import NotesPage from "./pages/NotesPage.tsx";
 import Signin from './pages/Signin.tsx';
 import Signup from './pages/Signup.tsx';
 import NoteEditor from "./components/Editor/NoteEditor.tsx";
+import SingleBlog from "./components/blogs/SingleBlog.tsx";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -44,13 +45,17 @@ const router = createBrowserRouter([
     element: <Layout children={<ExpandedBlogs />} />
   },
   {
+    path : "/blog",
+    element : <Layout children={<SingleBlog />} />
+  },
+  {
     path : "/notes",
     element : <Layout children={<NotesPage />} />
   },
   {
     path : "/note/add",
     element : <Layout children={<NoteEditor />} />
-  }
+  },
 ]);
 
 createRoot(document.getElementById('root')!).render(

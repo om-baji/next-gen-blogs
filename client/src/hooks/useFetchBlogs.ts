@@ -1,6 +1,15 @@
 import { axiosInstance } from "@/utils/axiosInstance";
 import { useEffect, useMemo, useState, useTransition } from "react";
 
+type Comment = {
+  id : string,
+  content : string,
+  parentId : string,
+  blogId : string,
+  userId : string,
+  commentedAt : string
+}
+
 type Blog = {
   id: string;
   image?: string;
@@ -8,6 +17,7 @@ type Blog = {
   body: string;
   email: string;
   createdAt : string;
+  comments? : Comment[];
 };
 
 export function useFetchBlogs() {

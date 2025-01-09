@@ -1,4 +1,5 @@
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { useNavigate } from "react-router-dom";
 
 type CardProps = {
     id: string;
@@ -9,9 +10,15 @@ type CardProps = {
 };
 
 const BlogCard = ({ id, image, title, body, date }: CardProps) => {
-    console.log(date)
+
+    const navigate = useNavigate()
+
+    const handleClick = () => navigate(`/blog?id=${id}`)
+
     return (
-        <Card key={id} className="shadow-lg w-full">
+        <Card 
+        onClick={handleClick}
+        key={id} className="shadow-lg w-full cursor-pointer">
             {image && (
                 <img
                     src={image}
