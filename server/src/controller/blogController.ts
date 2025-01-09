@@ -16,6 +16,9 @@ export class BlogController {
           where: {
             id: query as string,
           },
+          include : {
+            comments : true
+          }
         });
       } else {
         blogs = await prisma.blogs.findMany();
