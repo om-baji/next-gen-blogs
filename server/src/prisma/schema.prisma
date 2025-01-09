@@ -8,12 +8,13 @@ datasource db {
 }
 
 model User {
-  id        String   @id
+  id        String     @id
   name      String?
-  email     String   @unique
-  createdAt DateTime @default(now())
+  email     String     @unique
+  createdAt DateTime   @default(now())
   notes     Notes[]
   blogs     Blogs[]
+  comments  Comments[]
 }
 
 model Notes {
@@ -28,13 +29,29 @@ model Notes {
 }
 
 model Blogs {
-  id        String   @id @default(cuid())
+  id        String     @id @default(cuid())
   title     String
   body      String
   image     String?
   userId    String
   email     String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
-  User      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @default(now()) @updatedAt
+  comments  Comments[]
+  User      User       @relation(fields: [userId], references: [id])
+}
+
+
+model Comments {
+  id          String     @id @default(cuid())
+  blogId      String
+  parentId    String?     
+  content     String
+  userId      String
+  commentedAt DateTime   @default(now())
+
+  Blog        Blogs      @relation(fields: [blogId], references: [id])
+  User        User       @relation(fields: [userId], references: [id])
+  parent      Comments?  @relation("CommentToParent", fields: [parentId], references: [id],onDelete: Cascade)
+  replies     Comments[] @relation("CommentToParent")
 }
