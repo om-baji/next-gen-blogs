@@ -25,7 +25,7 @@ const Comments = ({ content, commentedAt,id }: CommentProps) => {
             </span>
           </div>
           
-          <p className="text-gray-700">{content}</p>
+          <p className="text-gray-300">{content}</p>
         </div>
       </div>
     </div>
