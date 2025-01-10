@@ -15,7 +15,7 @@ const app = new Hono<{
 
 app.use(
   cors({
-    origin: ["http://localhost:5173"],
+    origin: ["http://localhost:5173", "https://next-gen-blogs.vercel.app"],
     credentials: true,
     allowMethods: ["GET", "POST", "PUT", "OPTIONS", "DELETE"],
   })
