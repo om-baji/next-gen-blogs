@@ -1,5 +1,5 @@
 import { axiosInstance } from "@/utils/axiosInstance";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 type Comment = {
   id: string;

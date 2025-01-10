@@ -10,7 +10,7 @@ const SearchBar = () => {
     ]
 
     const onSearch = () => {
-
+        console.log(search)
     }
 
     return (

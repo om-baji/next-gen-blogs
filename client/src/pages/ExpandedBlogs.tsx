@@ -1,10 +1,9 @@
 import Blogs from '@/components/mainBlogs/Blogs'
 import Header from '@/components/mainBlogs/Header'
 import SearchBar from '@/components/mainBlogs/SearchBar'
-import React from 'react'
 import { Button } from '@/components/ui/button'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import Navbar from '@/components/Navbar'
 
 const ExpandedBlogs: React.FC = () => {
     const navigate = useNavigate()
