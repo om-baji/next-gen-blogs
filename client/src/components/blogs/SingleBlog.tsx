@@ -1,23 +1,24 @@
+import { toast } from '@/hooks/use-toast';
 import { useSingleBlog } from '@/hooks/useSingleBlog';
+import { axiosInstance } from '@/utils/axiosInstance';
 import { Loader2 } from 'lucide-react';
 import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import CommentSection from '../comments/CommentSection';
+import { Button } from '../ui/button';
+import { Input } from '../ui/input';
 import Blogbody from './Blog-body';
 import Header from './Header';
-import { toast } from '@/hooks/use-toast';
-import { axiosInstance } from '@/utils/axiosInstance';
-import { Input } from '../ui/input';
-import { Button } from '../ui/button';
 
 const SingleBlog: React.FC = () => {
     const [query] = useSearchParams();
     const id = query.get('id');
-    const { blog, isLoading, error, replies, comments } = useSingleBlog(id as string);
+    const { blog, isLoading, error, replies, comments,refetch } = useSingleBlog(id as string);
     const [content, setContent] = useState("")
+    const [isPosting,setIsPosting] = useState(false)
 
     const onComment = async () => {
-
+        setIsPosting(true)
         try {
 
             await axiosInstance.post(`/comment?id=${blog?.id}`, {
@@ -29,12 +30,17 @@ const SingleBlog: React.FC = () => {
                 title: "Success"
             })
 
+            setContent("")
+            refetch()
+
         } catch (error) {
             console.error(error)
             toast({
                 title: "Something went wrong!",
                 description: error instanceof Error ? error.message : error as string
             })
+        } finally {
+            setIsPosting(false)
         }
     }
 
@@ -79,13 +85,13 @@ const SingleBlog: React.FC = () => {
                     <Blogbody markdown={blog.body} />
                 </article>
                 <section className='space-y-4'>
-                    <h2>Comments</h2>
+                    <h2>Comments <span className='text-gray-400'>{comments.length}</span></h2>
                     <Input 
                     onChange={e => setContent(e.target.value)}
                     placeholder='Enter your comment'/>
                     <Button
                     onClick={onComment}
-                    >Post</Button>
+                    >{isPosting ? "Posting.." : "Post"}</Button>
                     {comments && <CommentSection comments={comments} replies={replies} blogId={blog.id}/>}
                 </section>
             </div>

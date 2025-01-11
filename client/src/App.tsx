@@ -11,7 +11,6 @@ const App: React.FC = () => {
           Next Genearation blog website!
         </p>
       </div>
-
     </div>
 
   );

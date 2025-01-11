@@ -1,19 +1,19 @@
 import { useFetchNotes } from '@/hooks/useFetchNotes'
-import { useAuth } from '@clerk/clerk-react'
+import { useUser } from '@clerk/clerk-react'
 import { Loader2 } from 'lucide-react'
 import React from 'react'
 import NotesCard from './Card'
 
 const RecentNotes: React.FC = () => {
-    const { userId, isLoaded } = useAuth()
+    const { user, isLoaded } = useUser()
 
-    const { notes, isPending } = useFetchNotes(userId as string)
-
-    if (!isLoaded) {
+    if (!isLoaded && !user) {
         return <div>
             <Loader2 />
         </div>
     }
+
+    const { notes, isPending } = useFetchNotes(user?.emailAddresses[0].emailAddress as string)
 
     return (
         <div className='min-w-[90%]'>

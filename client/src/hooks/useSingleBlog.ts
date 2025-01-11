@@ -37,8 +37,8 @@ export function useSingleBlog(id: string) {
       setBlog(data);
 
       if (data.comments) {
-        setComments(data.comments.filter(comment => !comment.parentId));
-        setReplies(data.comments.filter(comment => comment.parentId));
+        setComments(data.comments.filter((comment) => !comment.parentId));
+        setReplies(data.comments.filter((comment) => comment.parentId));
       }
     } catch (error) {
       console.error(error);
@@ -52,5 +52,5 @@ export function useSingleBlog(id: string) {
     fetchBlog();
   }, [fetchBlog]);
 
-  return { blog, isLoading, error, comments, replies };
+  return { blog, isLoading, error, comments, replies, refetch: fetchBlog };
 }

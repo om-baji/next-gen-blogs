@@ -6,6 +6,7 @@ import { toast } from '@/hooks/use-toast';
 import { axiosInstance } from '@/utils/axiosInstance';
 import { useAuth } from '@clerk/clerk-react';
 import { Loader2 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 type Comment = {
     id: string;
@@ -26,7 +27,8 @@ const CommentSection = ({ comments, replies, blogId }: Props) => {
     const [show, setShow] = useState<Record<string, boolean>>({})
     const [content, setContent] = useState("")
     const { userId, isLoaded } = useAuth()
-
+    const [isPosting,setIsPosting] = useState(false)
+    const navigate = useNavigate()
     const toggleShow = (id: string) => {
         setShow((prevState) => ({
             ...prevState,
@@ -35,6 +37,7 @@ const CommentSection = ({ comments, replies, blogId }: Props) => {
     };
 
     const onReply = async (id: string) => {
+        setIsPosting(true)
         try {
 
             await axiosInstance.post(`/comment?id=${blogId}`, {
@@ -47,12 +50,16 @@ const CommentSection = ({ comments, replies, blogId }: Props) => {
                 title : "Replied"
             })
 
+            navigate(0)
+
         } catch (error) {
             console.error(error)
             toast({
                 title: "Something went wrong!",
                 description: error instanceof Error ? error.message : error as string
             })
+        } finally {
+            setIsPosting(false)
         }
     }
 
@@ -82,7 +89,7 @@ const CommentSection = ({ comments, replies, blogId }: Props) => {
                                     placeholder='Enter your comment' />
                                 <Button
                                     onClick={() => onReply(comment.id)}
-                                >Post</Button>
+                                >{isPosting ? "Posting.." : "Post"}</Button>
                             </div>
 
                             {replies
