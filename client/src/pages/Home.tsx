@@ -20,7 +20,7 @@ const Home: React.FC = () => {
         <h4 className="scroll-m-20 text-xl font-semibold tracking-tight text-center mt-8 md:md-0">
           Trending Posts!
         </h4>
-        <div className='flex justify-center items-center h-screen'>
+        <div className='flex justify-center items-center p-6'>
           <RecentBlogs />
         </div>
       </ResizablePanel>

@@ -14,7 +14,7 @@ const RecentBlogs: React.FC = () => {
     }
 
     return (
-        <div className='min-w-[90%]'>
+        <div className='min-w-[90%] space-y-6 p-4'>
             {blogs.length > 0 ? blogs
                 .slice(0, 6)
                 .map((blog) => {
