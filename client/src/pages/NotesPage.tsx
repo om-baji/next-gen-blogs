@@ -10,6 +10,7 @@ type TransformNotes = {
     title: string;
     description: string;
     link: string;
+    id : string;
 };
 
 const NotesPage: React.FC = () => {
@@ -23,11 +24,17 @@ const NotesPage: React.FC = () => {
         navigate("/note/add")
     }
 
+    const handleDelete = (idx: number) => {
+        
+        console.log('Deleting item at index:', idx);
+      };
+
     const transformNotes = useCallback((notes: Note[] = []) => {
         const filtered: TransformNotes[] = notes.map((note) => ({
             title: note.title,
             description: note.content,
-            link: `/${note.userId}?id=${note.id}`,
+            link: `#`,
+            id : note.id
         }));
 
         setFinalNotes(filtered);
@@ -50,7 +57,7 @@ const NotesPage: React.FC = () => {
 
         <div className="flex p-4">
             {finalNotes.length > 0 ? (
-                <HoverEffect items={finalNotes} />
+                <HoverEffect items={finalNotes} onDelete={handleDelete}/>
             ) : (
                 <p className="text-gray-500">No notes available.</p>
             )}

@@ -3,16 +3,15 @@ import { ClerkProvider } from '@clerk/clerk-react';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { ThemeProvider } from './components/ThemeProvider.tsx';
-import './index.css';
-import Layout from './components/Sidebar.tsx';
-import Home from "./pages/Home.tsx";
 import App from "./App.tsx";
-import BackgroundProvider from "./components/BackgroundProvider.tsx";
 import SingleBlog from "./components/blogs/SingleBlog.tsx";
 import NoteEditor from "./components/Editor/NoteEditor.tsx";
+import Layout from './components/Sidebar.tsx';
+import { ThemeProvider } from './components/ThemeProvider.tsx';
+import './index.css';
 import BlogEdit from "./pages/BlogEdit.tsx";
 import ExpandedBlogs from "./pages/ExpandedBlogs.tsx";
+import Home from "./pages/Home.tsx";
 import NotesPage from "./pages/NotesPage.tsx";
 import Signin from "./pages/Signin.tsx";
 import Signup from "./pages/Signup.tsx";
@@ -30,7 +29,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/",
-    element: <BackgroundProvider children={<App />} />,
+    element: <App />
   },
   {
     path: "/home",
