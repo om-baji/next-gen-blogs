@@ -49,21 +49,22 @@ export class UserWebhook {
           },
           200
         );
-      } catch (err) {
-        console.error("Webhook verification failed:", err);
+      } catch (error) {
+
         return c.json(
           {
             message: "Invalid webhook signature!",
-            err
+            error : error instanceof Error ? error.message : String(error) 
           },
           400
         );
       }
     } catch (error) {
-      console.error("An error occurred:", error);
+
       return c.json(
         {
           message: "An error occurred while processing the webhook!",
+          error : error instanceof Error ? error.message : String(error)
         },
         500
       );

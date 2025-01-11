@@ -39,7 +39,7 @@ export class NotesController {
       return c.json(
         {
           message: "An error occurred",
-          error: String(error),
+          error: error instanceof Error ? error.message : String(error),
         },
         500
       );
@@ -66,7 +66,7 @@ export class NotesController {
       return c.json(
         {
           message: "An error occurred",
-          error: String(error),
+          error: error instanceof Error ? error.message : String(error)
         },
         500
       );
@@ -103,7 +103,7 @@ export class NotesController {
       return c.json(
         {
           message: "An error occurred",
-          error: String(error),
+          error: error instanceof Error ? error.message : String(error),
         },
         500
       );
@@ -147,7 +147,7 @@ export class NotesController {
       return c.json(
         {
           message: "An error occurred",
-          error: String(error),
+          error: error instanceof Error ? error.message : String(error),
         },
         500
       );
@@ -169,7 +169,7 @@ export class NotesController {
       return c.json(
         {
           message: "An error occurred",
-          error: String(error),
+          error: error instanceof Error ? error.message : String(error),
         },
         500
       );
