@@ -3,10 +3,11 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { useSignIn } from "@clerk/clerk-react"
-import { useState } from "react"
+import { useSession, useSignIn } from "@clerk/clerk-react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Alert, AlertDescription } from "../ui/alert"
+import { toast } from "@/hooks/use-toast"
 
 export function LoginForm({
   className,
@@ -18,6 +19,16 @@ export function LoginForm({
   const [isPending, setPending] = useState(false)
   const [error, setError] = useState("")
   const navigate = useNavigate()
+  const { session } = useSession()
+
+  useEffect(() => {
+    if(session) {
+      navigate("/home")
+      toast({
+        title : "Already logged in"
+      })
+    }
+  },[session])
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
