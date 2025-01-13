@@ -15,6 +15,8 @@ import Home from "./pages/Home.tsx";
 import NotesPage from "./pages/NotesPage.tsx";
 import Signin from "./pages/Signin.tsx";
 import Signup from "./pages/Signup.tsx";
+import { Guard } from "./components/guard/Guard.tsx";
+import { AuthProvider } from "./context/AuthContext.tsx";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -33,27 +35,27 @@ const router = createBrowserRouter([
   },
   {
     path: "/home",
-    element: <Layout children={<Home />} />
+    element: <Guard children={<Layout children={<Home />} />} />
   },
   {
     path: "/edit",
-    element: <BlogEdit />
+    element: <Guard children={<BlogEdit />} />
   },
   {
     path: "/blogs",
-    element: <Layout children={<ExpandedBlogs />} />
+    element: <Guard children={<Layout children={<ExpandedBlogs />} />} />
   },
   {
-    path : "/blog",
-    element : <Layout children={<SingleBlog />} />
+    path: "/blog",
+    element: <Guard children={<Layout children={<SingleBlog />} />} />
   },
   {
-    path : "/notes",
-    element : <Layout children={<NotesPage />} />
+    path: "/notes",
+    element: <Guard children={<Layout children={<NotesPage />} />} />
   },
   {
-    path : "/note/add",
-    element : <Layout children={<NoteEditor />} />
+    path: "/note/add",
+    element: <Guard children={<Layout children={<NoteEditor />} /> }/>
   },
 ]);
 
@@ -61,7 +63,9 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
       <ThemeProvider>
-        <RouterProvider router={router} />
+        <AuthProvider>
+          <RouterProvider router={router} />
+        </AuthProvider>
         <Toaster />
       </ThemeProvider>
     </ClerkProvider>
