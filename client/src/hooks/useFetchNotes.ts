@@ -23,7 +23,6 @@ export function useFetchNotes(email: string) {
         .post("notes", { email }, { signal: abortController.signal })
         .then((response) => {
           setNotes(response.data.notes || []);
-          console.log(response.data.notes);
         })
         .catch((err) => {
           if (err.name !== "AbortError") {

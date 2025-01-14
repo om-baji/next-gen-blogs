@@ -24,6 +24,7 @@ const RecentNotes: React.FC = () => {
                     .slice(0, 6)
                     .map((note) => {
                         return <NotesCard
+                            key={note.id}
                             title={note.title}
                             createdAt={note.createdAt}
                             content={note.content}

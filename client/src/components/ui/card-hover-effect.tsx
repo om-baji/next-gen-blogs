@@ -14,15 +14,16 @@ export const HoverEffect = ({
     title: string;
     description: string;
     link: string;
+    id : string;
   }[];
   className?: string;
-  onDelete?: (idx: number) => void;
+  onDelete?: (idx: number,id : string) => void;
 }) => {
   let [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-  const handleDelete = (e: React.MouseEvent, idx: number) => {
+  const handleDelete = (e: React.MouseEvent, idx: number, id : string) => {
     e.preventDefault();
-    onDelete?.(idx);
+    onDelete?.(idx,id);
   };
 
   return (
@@ -67,7 +68,7 @@ export const HoverEffect = ({
                 variant="ghost"
                 size="icon"
                 className="relative z-50 opacity-0 group-hover:opacity-100 transition-opacity -mt-2 text-red-500 hover:text-red-600 hover:bg-red-100/10"
-                onClick={(e) => handleDelete(e, idx)}
+                onClick={(e) => handleDelete(e, idx,item.id)}
               >
                 <Trash2 className="h-4 w-4" />
               </Button>

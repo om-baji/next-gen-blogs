@@ -14,10 +14,10 @@ const Blogs: React.FC = () => {
     }
 
     return (
-        <div className='p-8 md:max-w-[40%] grid-cols-1 md:grid-cols-3 gap-4'>
+        <div className='p-8 md:max-w-[40%] grid-cols-1 md:grid-cols-3'>
             {blogs.length > 0 ? blogs
                 .map((blog) => {
-                    return <div className='col-span-1'>
+                    return <div className='mt-4'>
                         <BlogCard
                             key={blog.id}
                             title={blog.title}
